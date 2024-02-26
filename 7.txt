@@ -1,0 +1,12 @@
+def tower(n , source , dest , temp):
+    if n==1:
+        print("Move disk1 fromn rod",source , "to rod" ,dest)
+
+        return
+
+    tower(n-1 , source , temp , dest)
+    print("MOVE Disk" ,n , "from rod", source , "to rod", dest)
+    tower(n-1,temp, dest , source)
+
+n=4
+tower(n,'A','C','B')

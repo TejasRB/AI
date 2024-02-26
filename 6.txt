@@ -1,0 +1,33 @@
+import itertools
+
+def tsp(graph):
+    num_nodes = len(graph)
+    all_nodes = set(range(num_nodes))
+    min_cost = float('inf')
+    min_path = None
+    
+    for path in itertools.permutations(all_nodes):
+        cost = 0
+        for i in range(num_nodes - 1):
+            cost += graph[path[i]][path[i+1]]
+        cost += graph[path[-1]][path[0]]  
+        if cost < min_cost:
+            min_cost = cost
+            min_path = path
+    
+    return min_path, min_cost
+
+def create_graph():
+    graph = []
+    num_nodes = int(input("Enter the number of nodes: "))
+    print("Enter the adjacency matrix (separate values by space):")
+    for _ in range(num_nodes):
+        row = list(map(int, input().split()))
+        graph.append(row)
+    return graph
+
+
+user_defined_graph = create_graph()
+shortest_path, shortest_distance = tsp(user_defined_graph)
+print("Shortest path:", shortest_path)
+print("Shortest distance:", shortest_distance)
